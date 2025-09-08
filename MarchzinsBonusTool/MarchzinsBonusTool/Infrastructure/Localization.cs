@@ -23,6 +23,11 @@ namespace MarchzinsBonusTool.Infrastructure
         /// </summary>
         public static string Get(string key)
         {
+            if (translations.ContainsKey(key) && translations[key].ContainsKey(currentLanguage))
+            {
+                return translations[key][currentLanguage];
+            }
+            return key; // Return unchanged word
         }
 
         /// <summary>
@@ -30,6 +35,7 @@ namespace MarchzinsBonusTool.Infrastructure
         /// </summary>
         public static void SetLanguage(Language language)
         {
+            currentLanguage = language;
         }
     }
 }
