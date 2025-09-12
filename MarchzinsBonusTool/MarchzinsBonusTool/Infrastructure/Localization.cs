@@ -15,6 +15,10 @@ namespace MarchzinsBonusTool.Infrastructure
             ["MainTitle"] = new() { 
                 [Language.German] = "Marchzins-Bonus Rechner",
                 [Language.English] = "March Interest Bonus Calculator"
+            },
+            ["Einstellungen"] = new() { 
+                [Language.German] = "Einstellungen",
+                [Language.English] = "Settings"
             }
         };
 

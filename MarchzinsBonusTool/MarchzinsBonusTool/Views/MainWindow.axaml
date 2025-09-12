@@ -1,0 +1,595 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MarchzinsBonusTool.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="700"
+        x:Class="MarchzinsBonusTool.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="Marchzins-Bonus Tool"
+        Width="900" Height="700"
+        MinWidth="800" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        CanResize="True">
+
+    <Window.Styles>
+        <Style Selector="TextBlock.section-title">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="TextBox:focus">
+            <Setter Property="BorderBrush" Value="#6B8FFF"/>
+        </Style>
+        <Style Selector="TextBox.error">
+            <Setter Property="BorderBrush" Value="#FF4444"/>
+        </Style>
+        <Style Selector="DatePicker">
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="#6B8FFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.primary:pointerover">
+            <Setter Property="Background" Value="#5A7FEF"/>
+        </Style>
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="#6C757D"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.secondary:pointerover">
+            <Setter Property="Background" Value="#5A6268"/>
+        </Style>
+        <Style Selector="Button.success">
+            <Setter Property="Background" Value="#28A745"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.warning">
+            <Setter Property="Background" Value="#FFA500"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.small">
+            <Setter Property="MinWidth" Value="40"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="Padding" Value="8,4"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#6B8FFF">
+            <Grid>
+                <TextBlock Text="Marchzins-Bonus Tool" 
+                           FontSize="20" 
+                           FontWeight="Bold" 
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="20,0,0,0"/>
+                
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,0,20,0">
+                    <Button Name="LanguageDE" 
+                            Content="DE" 
+                            Classes="small"
+                            Background="White"
+                            Foreground="#6B8FFF"
+                            Margin="0,0,5,0"
+                            Click="OnLanguageDEClick"/>
+                    <Button Name="LanguageEN" 
+                            Content="EN" 
+                            Classes="small"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            Margin="0,0,5,0"
+                            Click="OnLanguageENClick"/>
+                    <Button Name="SettingsButton" 
+                            Content="⚙" 
+                            Classes="small"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            FontSize="18"
+                            Click="OnSettingsClick"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <!-- Input View (shown when no results) -->
+                <Grid IsVisible="{Binding !HasResults}" Margin="40,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Left Column - Input Fields -->
+                    <Border Grid.Column="0" 
+                            Background="White" 
+                            CornerRadius="8"
+                            Padding="30"
+                            Margin="0,0,20,0"
+                            BoxShadow="0 2 10 0 #20000000">
+                        
+                        <StackPanel>
+                            <TextBlock Text="Kundendaten" Classes="section-title"/>
+                            
+                            <!-- Kundenname -->
+                            <TextBlock Text="Kundenname (optional)" 
+                                       Margin="0,0,0,5"
+                                       Foreground="#666"/>
+                            <TextBox Text="{Binding KundenNameInput}"
+                                     Watermark="Max Mustermann"
+                                     Margin="0,0,0,15"/>
+                            
+                            <!-- Geburtsdatum -->
+                            <TextBlock Text="Geburtsdatum" 
+                                       Margin="0,0,0,5"
+                                       Foreground="#666"/>
+                            <DatePicker SelectedDate="{Binding GeburtsdatumOffset}"
+                                        Margin="0,0,0,15"/>
+                            
+                            <!-- Aktuelles Datum (read-only) -->
+                            <TextBlock Text="Aktuelles Datum" 
+                                       Margin="0,0,0,5"
+                                       Foreground="#666"/>
+                            <TextBox Text="{Binding CurrentDateDisplay}"
+                                     IsReadOnly="True"
+                                     Background="#F8F9FA"
+                                     Margin="0,0,0,15"/>
+                            
+                            <!-- Sparkapital -->
+                            <TextBlock Text="Sparkapital" 
+                                       Margin="0,0,0,5"
+                                       Foreground="#666"/>
+                            <TextBox Name="SparkapitalTextBox"
+                                     Text="{Binding SparkapitalInput}"
+                                     Watermark="100'000.00"
+                                     Margin="0,0,0,15">
+                                <TextBox.Styles>
+                                    <Style Selector="TextBox">
+                                        <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                    </Style>
+                                    <Style Selector="TextBox[Tag=error]">
+                                        <Setter Property="BorderBrush" Value="#FF4444"/>
+                                    </Style>
+                                </TextBox.Styles>
+                            </TextBox>
+                            
+                            <Separator Margin="0,10,0,20" Background="#E0E0E0"/>
+                            
+                            <TextBlock Text="Zinssätze &amp; Parameter" Classes="section-title"/>
+                            
+                            <!-- Normaler Zinssatz -->
+                            <TextBlock Text="Normaler Zinssatz (%)" 
+                                       Margin="0,0,0,5"
+                                       Foreground="#666"/>
+                            <TextBox Text="{Binding NormalerZinssatzInput}"
+                                     Watermark="1.50"
+                                     Margin="0,0,0,15"/>
+                            
+                            <!-- Erhöhter Zinssatz -->
+                            <TextBlock Text="Erhöhter Zinssatz (%)" 
+                                       Margin="0,0,0,5"
+                                       Foreground="#666"/>
+                            <TextBox Text="{Binding BonusZinssatzInput}"
+                                     Watermark="2.50"
+                                     Margin="0,0,0,15"/>
+                            
+                            <!-- Verrechnungssteuer -->
+                            <TextBlock Text="Verrechnungssteuer (%)" 
+                                       Margin="0,0,0,5"
+                                       Foreground="#666"/>
+                            <TextBox Text="{Binding SteuersatzInput}"
+                                     Watermark="35"
+                                     Margin="0,0,0,15"/>
+                            
+                            
+                            <!-- Buttons -->
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button Content="Berechnen" 
+                                        Classes="primary"
+                                        Command="{Binding CalculateCommand}"
+                                        Margin="0,0,10,0"/>
+                                <Button Content="Zurücksetzen" 
+                                        Classes="secondary"
+                                        Command="{Binding ResetCommand}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Right Column - Anleitung -->
+                    <Border Grid.Column="1" 
+                            Background="#FFF9E6" 
+                            CornerRadius="8"
+                            Padding="25"
+                            BoxShadow="0 2 10 0 #20000000">
+                        
+                        <StackPanel>
+                            <TextBlock Text="Anleitung" 
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="#FF9800"
+                                       Margin="0,0,0,20"/>
+                            
+                            <StackPanel>
+                                <TextBlock TextWrapping="Wrap" Margin="0,0,0,10">
+                                    <Run Text="1. " FontWeight="Bold" Foreground="#FF9800"/>
+                                    <Run Text="Kundendaten eingeben" Foreground="#666"/>
+                                </TextBlock>
+                                
+                                <TextBlock TextWrapping="Wrap" Margin="0,0,0,10">
+                                    <Run Text="2. " FontWeight="Bold" Foreground="#FF9800"/>
+                                    <Run Text="Geburtsdatum im aktuellen Monat wählen" Foreground="#666"/>
+                                </TextBlock>
+                                
+                                <TextBlock TextWrapping="Wrap" Margin="0,0,0,10">
+                                    <Run Text="3. " FontWeight="Bold" Foreground="#FF9800"/>
+                                    <Run Text="Sparkapital eingeben" Foreground="#666"/>
+                                </TextBlock>
+                                
+                                <TextBlock TextWrapping="Wrap" Margin="0,0,0,10">
+                                    <Run Text="4. " FontWeight="Bold" Foreground="#FF9800"/>
+                                    <Run Text="Zinssätze überprüfen" Foreground="#666"/>
+                                </TextBlock>
+                                
+                                <TextBlock TextWrapping="Wrap" Margin="0,0,0,20">
+                                    <Run Text="5. " FontWeight="Bold" Foreground="#FF9800"/>
+                                    <Run Text="Berechnen klicken" Foreground="#666"/>
+                                </TextBlock>
+                                
+                                <TextBlock TextWrapping="Wrap" 
+                                           Foreground="#666"
+                                           FontSize="12"
+                                           Margin="0,10,0,0">
+                                    Der Marchzins-Bonus gilt vom 1. des Monats bis zum Geburtstag.
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Error Display -->
+                <Border IsVisible="{Binding HasErrors}" 
+                        Background="#FFEBEE"
+                        CornerRadius="8"
+                        Padding="20"
+                        Margin="40,30"
+                        BorderBrush="#FF4444"
+                        BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Bitte korrigieren Sie die folgenden Fehler, bevor Sie fortfahren:"
+                                       FontWeight="Bold"
+                                       Foreground="#D32F2F"
+                                       Margin="0,0,0,20"/>
+                            
+                            <Border Background="White" 
+                                    CornerRadius="4" 
+                                    Padding="15"
+                                    Margin="0,0,20,20">
+                                <StackPanel>
+                                    <TextBlock Text="Kundendaten" 
+                                               FontWeight="SemiBold"
+                                               Margin="0,0,0,10"/>
+                                    
+                                    <Border Height="40" 
+                                            BorderBrush="#FF4444" 
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Margin="0,0,0,10">
+                                        <TextBlock Text="Geburtsdatum darf nicht in der Zukunft liegen"
+                                                   Foreground="#D32F2F"
+                                                   VerticalAlignment="Center"
+                                                   Margin="10,0"/>
+                                    </Border>
+                                    
+                                    <Border Height="40" 
+                                            BorderBrush="#FF4444" 
+                                            BorderThickness="1"
+                                            CornerRadius="4">
+                                        <TextBlock Text="Kapital muss positiv sein"
+                                                   Foreground="#D32F2F"
+                                                   VerticalAlignment="Center"
+                                                   Margin="10,0"/>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Background="White" 
+                                    CornerRadius="4" 
+                                    Padding="15"
+                                    Margin="0,0,20,0">
+                                <StackPanel>
+                                    <TextBlock Text="Zinssätze &amp; Parameter" 
+                                               FontWeight="SemiBold"
+                                               Margin="0,0,0,10"/>
+                                    
+                                    <Border Height="40" 
+                                            BorderBrush="#FF4444" 
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Margin="0,0,0,10">
+                                        <TextBlock Text="Bitte geben Sie eine gültige Zahl ein"
+                                                   Foreground="#D32F2F"
+                                                   VerticalAlignment="Center"
+                                                   Margin="10,0"/>
+                                    </Border>
+                                    
+                                    <Border Height="40" 
+                                            BorderBrush="#FF4444" 
+                                            BorderThickness="1"
+                                            CornerRadius="4">
+                                        <TextBlock Text="Steuersatz muss zwischen 0-100% liegen"
+                                                   Foreground="#D32F2F"
+                                                   VerticalAlignment="Center"
+                                                   Margin="10,0"/>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Button Content="Berechnen" 
+                                    Classes="primary"
+                                    IsEnabled="False"
+                                    Opacity="0.5"
+                                    Margin="0,20,0,0"/>
+                        </StackPanel>
+                        
+                        <Border Grid.Column="1" 
+                                Background="#FFEBEE" 
+                                CornerRadius="8"
+                                Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="Fehlerübersicht" 
+                                           FontSize="16"
+                                           FontWeight="Bold"
+                                           Foreground="#D32F2F"
+                                           Margin="0,0,0,15"/>
+                                
+                                <TextBlock Text="• Geburtsdatum: Zukunftsdatum nicht erlaubt"
+                                           Foreground="#D32F2F"
+                                           Margin="0,0,0,5"/>
+                                <TextBlock Text="• Sparkapital: Negative Werte sind ungültig"
+                                           Foreground="#D32F2F"
+                                           Margin="0,0,0,5"/>
+                                <TextBlock Text="• Bonus-Zinssatz: Nur Zahlen erlaubt"
+                                           Foreground="#D32F2F"
+                                           Margin="0,0,0,5"/>
+                                <TextBlock Text="• Steuersatz: Muss zwischen 0-100% sein"
+                                           Foreground="#D32F2F"
+                                           Margin="0,0,0,20"/>
+                                
+                                <TextBlock Text="Korrigieren Sie diese Felder, um fortzufahren."
+                                           Foreground="#666"
+                                           TextWrapping="Wrap"
+                                           Margin="0,0,0,20"/>
+                                
+                                <Border Background="#FFF9C4" 
+                                        CornerRadius="4"
+                                        Padding="10">
+                                    <StackPanel>
+                                        <TextBlock Text="Tipps zur Fehlerbehebung:"
+                                                   FontWeight="Bold"
+                                                   Foreground="#F57C00"
+                                                   Margin="0,0,0,5"/>
+                                        <TextBlock Text="• Datum im Format TT.MM.JJJJ"
+                                                   Foreground="#666"
+                                                   FontSize="11"
+                                                   Margin="0,0,0,2"/>
+                                        <TextBlock Text="• Nur positive Zahlen für Kapital"
+                                                   Foreground="#666"
+                                                   FontSize="11"
+                                                   Margin="0,0,0,2"/>
+                                        <TextBlock Text="• Dezimalzahlen mit Punkt (1.50)"
+                                                   Foreground="#666"
+                                                   FontSize="11"
+                                                   Margin="0,0,0,2"/>
+                                        <TextBlock Text="• Prozentsätze ohne % eingeben"
+                                                   Foreground="#666"
+                                                   FontSize="11"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- Results View (shown when HasResults) -->
+                <Grid IsVisible="{Binding HasResults}" Margin="40,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Success Message -->
+                    <Border Grid.ColumnSpan="2" 
+                            Background="#E8F5E9"
+                            CornerRadius="8"
+                            Padding="15"
+                            Margin="0,0,0,20"
+                            VerticalAlignment="Top">
+                        <TextBlock Text="Berechnung erfolgreich abgeschlossen!"
+                                   FontWeight="Bold"
+                                   Foreground="#2E7D32"
+                                   HorizontalAlignment="Center"/>
+                    </Border>
+
+                    <!-- Left Column - Calculation Basis -->
+                    <Border Grid.Column="0" 
+                            Background="#E3F2FD" 
+                            CornerRadius="8"
+                            Padding="25"
+                            Margin="0,50,20,0">
+                        <StackPanel>
+                            <TextBlock Text="Berechnungsgrundlage" 
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Foreground="#1976D2"
+                                       Margin="0,0,0,15"/>
+                            
+                            <TextBlock Margin="0,0,0,5">
+                                <Run Text="Kunde: " FontWeight="SemiBold"/>
+                                <Run Text="{Binding KundenNameInput}"/>
+                            </TextBlock>
+                            
+                            <TextBlock Margin="0,0,0,5">
+                                <Run Text="Kapital: " FontWeight="SemiBold"/>
+                                <Run Text="{Binding FormattedSparkapital}"/>
+                            </TextBlock>
+                            
+                            <TextBlock Margin="0,0,0,5">
+                                <Run Text="Geburtstag: " FontWeight="SemiBold"/>
+                                <Run Text="{Binding FormattedGeburtsdatum}"/>
+                            </TextBlock>
+                            
+                            <TextBlock Margin="0,0,0,15">
+                                <Run Text="Zinssätze: " FontWeight="SemiBold"/>
+                                <Run Text="{Binding ZinssatzDisplay}"/>
+                            </TextBlock>
+                            
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button Content="Neue Berechnung" 
+                                        Classes="success"
+                                        Command="{Binding NewCalculationCommand}"
+                                        Margin="0,0,10,0"/>
+                            </StackPanel>
+                            
+                            <Border Background="#FFF9C4" 
+                                    CornerRadius="4"
+                                    Padding="10"
+                                    Margin="0,20,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="Kundeninformation"
+                                               FontWeight="Bold"
+                                               Foreground="#F57C00"
+                                               Margin="0,0,0,5"/>
+                                    <TextBlock Text="Der Marchzins-Bonus wurde erfolgreich für Maria Schneider berechnet. Bitte archivieren Sie diese Berechnung für Ihre Unterlagen."
+                                               TextWrapping="Wrap"
+                                               Foreground="#666"
+                                               FontSize="11"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Right Column - Detailed Results -->
+                    <Border Grid.Column="1" 
+                            Background="#6B8FFF" 
+                            CornerRadius="8"
+                            Padding="25">
+                        <StackPanel>
+                            <TextBlock Text="Detailliertes Ergebnis" 
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Margin="0,0,0,20"/>
+                            
+                            <TextBlock Text="Berechnungsdetails:"
+                                       FontWeight="SemiBold"
+                                       Foreground="White"
+                                       Margin="0,0,0,10"/>
+                            
+                            <TextBlock Foreground="White" 
+                                       Margin="0,0,0,5"
+                                       FontSize="13">
+                                <Run Text="Normal-Periode: "/>
+                                <Run Text="{Binding NormalPeriodDisplay}"/>
+                            </TextBlock>
+                            
+                            <TextBlock Text="{Binding NormalCalculationDisplay}"
+                                       Foreground="White"
+                                       FontSize="12"
+                                       Margin="0,0,0,10"/>
+                            
+                            <TextBlock Foreground="White" 
+                                       Margin="0,0,0,5"
+                                       FontSize="13">
+                                <Run Text="Bonus-Periode: "/>
+                                <Run Text="{Binding BonusPeriodDisplay}"/>
+                            </TextBlock>
+                            
+                            <TextBlock Text="{Binding BonusCalculationDisplay}"
+                                       Foreground="White"
+                                       FontSize="12"
+                                       Margin="0,0,0,20"/>
+                            
+                            <TextBlock Text="Zusammenfassung:"
+                                       FontWeight="SemiBold"
+                                       Foreground="White"
+                                       Margin="0,0,0,10"/>
+                            
+                            <TextBlock Foreground="White" 
+                                       Margin="0,0,0,5">
+                                <Run Text="Brutto-Zinsen gesamt: "/>
+                                <Run Text="{Binding DisplayBruttoZinsenTotal}"/>
+                            </TextBlock>
+                            
+                            <TextBlock Foreground="White" 
+                                       Margin="0,0,0,20">
+                                <Run Text="Verrechnungssteuer (35%): - "/>
+                                <Run Text="{Binding DisplaySteuerabzug}"/>
+                            </TextBlock>
+                            
+                            <Border Background="White" 
+                                    CornerRadius="4"
+                                    Padding="15"
+                                    Margin="0,10,0,0">
+                                <TextBlock FontSize="20"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center">
+                                    <Run Text="NETTO-ZINSEN: "/>
+                                    <Run Text="{Binding DisplayNettoZinsen}" Foreground="#2E7D32"/>
+                                </TextBlock>
+                            </Border>
+                            
+                            <TextBlock Text="{Binding CalculationTimestamp}"
+                                       Foreground="White"
+                                       FontSize="11"
+                                       HorizontalAlignment="Right"
+                                       Margin="0,15,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>
