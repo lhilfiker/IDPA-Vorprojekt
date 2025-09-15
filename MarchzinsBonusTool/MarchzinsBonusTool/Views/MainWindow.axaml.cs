@@ -5,6 +5,7 @@ using MarchzinsBonusTool.Infrastructure;
 using MarchzinsBonusTool.ViewModels;
 using System;
 using System.Threading.Tasks;
+using Avalonia.Controls.Documents;
 
 namespace MarchzinsBonusTool.Views
 {
@@ -27,11 +28,189 @@ namespace MarchzinsBonusTool.Views
         }
 
         private void UpdateLocalizedTexts()
-        {
-            Title = Localization.Get("MainTitle");
-            // TODO: all translations            
-        }
+{
+    Title = Localization.Get("MainTitle");
+    
+    // Header
+    var headerTitle = this.FindControl<TextBlock>("HeaderTitle");
+    if (headerTitle != null)
+        headerTitle.Text = Localization.Get("MainTitle");
+    
+    // Input Section
+    var customerDataTitle = this.FindControl<TextBlock>("CustomerDataTitle");
+    if (customerDataTitle != null)
+        customerDataTitle.Text = Localization.Get("CustomerData");
+    
+    var customerNameLabel = this.FindControl<TextBlock>("CustomerNameLabel");
+    if (customerNameLabel != null)
+        customerNameLabel.Text = Localization.Get("CustomerName");
+    
+    var customerNameTextBox = this.FindControl<TextBox>("CustomerNameTextBox");
+    if (customerNameTextBox != null)
+        customerNameTextBox.Watermark = Localization.Get("CustomerNamePlaceholder");
+    
+    var birthDateLabel = this.FindControl<TextBlock>("BirthDateLabel");
+    if (birthDateLabel != null)
+        birthDateLabel.Text = Localization.Get("BirthDate");
+    
+    var currentDateLabel = this.FindControl<TextBlock>("CurrentDateLabel");
+    if (currentDateLabel != null)
+        currentDateLabel.Text = Localization.Get("CurrentDate");
+    
+    var savingsCapitalLabel = this.FindControl<TextBlock>("SavingsCapitalLabel");
+    if (savingsCapitalLabel != null)
+        savingsCapitalLabel.Text = Localization.Get("SavingsCapital");
+    
+    var sparkapitalTextBox = this.FindControl<TextBox>("SparkapitalTextBox");
+    if (sparkapitalTextBox != null)
+        sparkapitalTextBox.Watermark = Localization.Get("SavingsCapitalPlaceholder");
+    
+    var interestRatesTitle = this.FindControl<TextBlock>("InterestRatesTitle");
+    if (interestRatesTitle != null)
+        interestRatesTitle.Text = Localization.Get("InterestRatesParameters");
+    
+    var normalInterestRateLabel = this.FindControl<TextBlock>("NormalInterestRateLabel");
+    if (normalInterestRateLabel != null)
+        normalInterestRateLabel.Text = Localization.Get("NormalInterestRate");
+    
+    var increasedInterestRateLabel = this.FindControl<TextBlock>("IncreasedInterestRateLabel");
+    if (increasedInterestRateLabel != null)
+        increasedInterestRateLabel.Text = Localization.Get("IncreasedInterestRate");
+    
+    var withholdingTaxLabel = this.FindControl<TextBlock>("WithholdingTaxLabel");
+    if (withholdingTaxLabel != null)
+        withholdingTaxLabel.Text = Localization.Get("WithholdingTax");
+    
+    // Buttons
+    var calculateButton = this.FindControl<Button>("CalculateButton");
+    if (calculateButton != null)
+        calculateButton.Content = Localization.Get("Calculate");
+    
+    var resetButton = this.FindControl<Button>("ResetButton");
+    if (resetButton != null)
+        resetButton.Content = Localization.Get("Reset");
+    
+    // Instructions
+    var instructionsTitle = this.FindControl<TextBlock>("InstructionsTitle");
+    if (instructionsTitle != null)
+        instructionsTitle.Text = Localization.Get("Instructions");
+    
+    var instructionNote = this.FindControl<TextBlock>("InstructionNote");
+    if (instructionNote != null)
+        instructionNote.Text = Localization.Get("InstructionNote");
+    
+    // Error Section
+    var errorHeaderText = this.FindControl<TextBlock>("ErrorHeaderText");
+    if (errorHeaderText != null)
+        errorHeaderText.Text = Localization.Get("ErrorHeader");
+    
+    var customerDataErrorTitle = this.FindControl<TextBlock>("CustomerDataErrorTitle");
+    if (customerDataErrorTitle != null)
+        customerDataErrorTitle.Text = Localization.Get("CustomerData");
+    
+    var errorBirthDateFutureText = this.FindControl<TextBlock>("ErrorBirthDateFutureText");
+    if (errorBirthDateFutureText != null)
+        errorBirthDateFutureText.Text = Localization.Get("ErrorBirthDateFuture");
+    
+    var errorCapitalPositiveText = this.FindControl<TextBlock>("ErrorCapitalPositiveText");
+    if (errorCapitalPositiveText != null)
+        errorCapitalPositiveText.Text = Localization.Get("ErrorCapitalPositive");
+    
+    var interestRatesErrorTitle = this.FindControl<TextBlock>("InterestRatesErrorTitle");
+    if (interestRatesErrorTitle != null)
+        interestRatesErrorTitle.Text = Localization.Get("InterestRatesParameters");
+    
+    var errorInvalidNumberText = this.FindControl<TextBlock>("ErrorInvalidNumberText");
+    if (errorInvalidNumberText != null)
+        errorInvalidNumberText.Text = Localization.Get("ErrorInvalidNumber");
+    
+    var errorTaxRangeText = this.FindControl<TextBlock>("ErrorTaxRangeText");
+    if (errorTaxRangeText != null)
+        errorTaxRangeText.Text = Localization.Get("ErrorTaxRange");
+    
+    var calculateButtonDisabled = this.FindControl<Button>("CalculateButtonDisabled");
+    if (calculateButtonDisabled != null)
+        calculateButtonDisabled.Content = Localization.Get("Calculate");
+    
+    var errorOverviewTitle = this.FindControl<TextBlock>("ErrorOverviewTitle");
+    if (errorOverviewTitle != null)
+        errorOverviewTitle.Text = Localization.Get("ErrorOverview");
+    
+    var errorBirthDateBulletText = this.FindControl<TextBlock>("ErrorBirthDateBulletText");
+    if (errorBirthDateBulletText != null)
+        errorBirthDateBulletText.Text = Localization.Get("ErrorBirthDateBullet");
+    
+    var errorCapitalBulletText = this.FindControl<TextBlock>("ErrorCapitalBulletText");
+    if (errorCapitalBulletText != null)
+        errorCapitalBulletText.Text = Localization.Get("ErrorCapitalBullet");
+    
+    var errorInterestBulletText = this.FindControl<TextBlock>("ErrorInterestBulletText");
+    if (errorInterestBulletText != null)
+        errorInterestBulletText.Text = Localization.Get("ErrorInterestBullet");
+    
+    var errorTaxBulletText = this.FindControl<TextBlock>("ErrorTaxBulletText");
+    if (errorTaxBulletText != null)
+        errorTaxBulletText.Text = Localization.Get("ErrorTaxBullet");
+    
+    var errorCorrectFieldsText = this.FindControl<TextBlock>("ErrorCorrectFieldsText");
+    if (errorCorrectFieldsText != null)
+        errorCorrectFieldsText.Text = Localization.Get("ErrorCorrectFields");
+    
+    var errorTroubleshootingTipsTitle = this.FindControl<TextBlock>("ErrorTroubleshootingTipsTitle");
+    if (errorTroubleshootingTipsTitle != null)
+        errorTroubleshootingTipsTitle.Text = Localization.Get("ErrorTroubleshootingTips");
+    
+    var errorTipDateText = this.FindControl<TextBlock>("ErrorTipDateText");
+    if (errorTipDateText != null)
+        errorTipDateText.Text = Localization.Get("ErrorTipDate");
+    
+    var errorTipPositiveText = this.FindControl<TextBlock>("ErrorTipPositiveText");
+    if (errorTipPositiveText != null)
+        errorTipPositiveText.Text = Localization.Get("ErrorTipPositive");
+    
+    var errorTipDecimalText = this.FindControl<TextBlock>("ErrorTipDecimalText");
+    if (errorTipDecimalText != null)
+        errorTipDecimalText.Text = Localization.Get("ErrorTipDecimal");
+    
+    var errorTipPercentText = this.FindControl<TextBlock>("ErrorTipPercentText");
+    if (errorTipPercentText != null)
+        errorTipPercentText.Text = Localization.Get("ErrorTipPercent");
+    
+    // Results Section
+    var calculationSuccessfulText = this.FindControl<TextBlock>("CalculationSuccessfulText");
+    if (calculationSuccessfulText != null)
+        calculationSuccessfulText.Text = Localization.Get("CalculationSuccessful");
+    
+    var calculationBasisTitle = this.FindControl<TextBlock>("CalculationBasisTitle");
+    if (calculationBasisTitle != null)
+        calculationBasisTitle.Text = Localization.Get("CalculationBasis");
+    
+    var newCalculationButton = this.FindControl<Button>("NewCalculationButton");
+    if (newCalculationButton != null)
+        newCalculationButton.Content = Localization.Get("NewCalculation");
+    
+    var customerInformationTitle = this.FindControl<TextBlock>("CustomerInformationTitle");
+    if (customerInformationTitle != null)
+        customerInformationTitle.Text = Localization.Get("CustomerInformation");
+    
+    var customerInfoText = this.FindControl<TextBlock>("CustomerInfoText");
+    if (customerInfoText != null)
+        customerInfoText.Text = Localization.Get("CustomerInfoText");
+    
+    var detailedResultTitle = this.FindControl<TextBlock>("DetailedResultTitle");
+    if (detailedResultTitle != null)
+        detailedResultTitle.Text = Localization.Get("DetailedResult");
+    
+    var calculationDetailsLabel = this.FindControl<TextBlock>("CalculationDetailsLabel");
+    if (calculationDetailsLabel != null)
+        calculationDetailsLabel.Text = Localization.Get("CalculationDetails");
+    
+    var summaryLabel = this.FindControl<TextBlock>("SummaryLabel");
+    if (summaryLabel != null)
+        summaryLabel.Text = Localization.Get("Summary");
+}
 
+        
         private void UpdateLanguageButtons()
         {
             var settings = Settings.Load();
