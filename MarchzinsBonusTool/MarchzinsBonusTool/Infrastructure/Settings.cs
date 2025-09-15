@@ -5,6 +5,45 @@ using Newtonsoft.Json;
 namespace MarchzinsBonusTool.Infrastructure
 {
     /// <summary>
+    /// Supported application languages.
+    /// </summary>
+    public enum Language
+    {
+        German = 0,
+        English = 1
+    }
+
+    /// <summary>
+    /// Default values for calculation inputs.
+    /// These values are used to pre-populate the UI forms.
+    /// </summary>
+    public class DefaultValues
+    {
+        public decimal DefaultCapital { get; set; } = 10000m;
+        public decimal DefaultNormalInterestRate { get; set; } = 1.5m;
+        public decimal DefaultBonusInterestRate { get; set; } = 2.5m;
+        public decimal DefaultTaxRate { get; set; } = 35m;
+
+        /// <summary>
+        /// Validates that all default values are within reasonable ranges.
+        /// </summary>
+        public void Validate()
+        {
+            if (DefaultCapital < 0)
+                DefaultCapital = 10000m;
+
+            if (DefaultNormalInterestRate < 0 || DefaultNormalInterestRate > 100)
+                DefaultNormalInterestRate = 1.5m;
+
+            if (DefaultBonusInterestRate < 0 || DefaultBonusInterestRate > 100)
+                DefaultBonusInterestRate = 2.5m;
+
+            if (DefaultTaxRate < 0 || DefaultTaxRate > 100)
+                DefaultTaxRate = 35m;
+        }
+    }
+
+    /// <summary>
     /// Application settings that are persisted to disk.
     /// Provides configuration management for user preferences, number formatting,
     /// language settings, and default calculation values.
@@ -16,7 +55,7 @@ namespace MarchzinsBonusTool.Infrastructure
             "MarchzinsBonusTool",
             "settings.json");
 
-        public Language Language { get; set; } = Language.German;
+        public Infrastructure.Language Language { get; set; } = Infrastructure.Language.German;
         public char ThousandsSeparator { get; set; } = '\'';
         public char DecimalSeparator { get; set; } = '.';
         public string Currency { get; set; } = "CHF";
@@ -34,7 +73,11 @@ namespace MarchzinsBonusTool.Infrastructure
                 Validate();
 
                 var directory = Path.GetDirectoryName(SettingsPath);
+<<<<<<< Updated upstream
                 if (!Directory.Exists(directory))
+=======
+                if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+>>>>>>> Stashed changes
                 {
                     Directory.CreateDirectory(directory);
                 }
@@ -59,23 +102,35 @@ namespace MarchzinsBonusTool.Infrastructure
             {
                 if (!File.Exists(SettingsPath))
                 {
+<<<<<<< Updated upstream
                     var defaultSettings = new Settings();
                     defaultSettings.Save();
                     return defaultSettings;
+=======
+                    return new Settings();
+>>>>>>> Stashed changes
                 }
 
                 var json = File.ReadAllText(SettingsPath);
 
                 if (string.IsNullOrWhiteSpace(json))
                 {
+<<<<<<< Updated upstream
                     return CreateDefaultSettings();
+=======
+                    return new Settings();
+>>>>>>> Stashed changes
                 }
 
                 var settings = JsonConvert.DeserializeObject<Settings>(json);
 
                 if (settings == null)
                 {
+<<<<<<< Updated upstream
                     return CreateDefaultSettings();
+=======
+                    return new Settings();
+>>>>>>> Stashed changes
                 }
 
                 settings.Validate();
@@ -84,7 +139,11 @@ namespace MarchzinsBonusTool.Infrastructure
             catch (Exception)
             {
                 CreateBackupOfCorruptedFile();
+<<<<<<< Updated upstream
                 return CreateDefaultSettings();
+=======
+                return new Settings();
+>>>>>>> Stashed changes
             }
         }
 
@@ -93,13 +152,20 @@ namespace MarchzinsBonusTool.Infrastructure
         /// </summary>
         public void ResetToDefaults()
         {
+<<<<<<< Updated upstream
             Language = Language.German;
+=======
+            Language = Infrastructure.Language.German;
+>>>>>>> Stashed changes
             ThousandsSeparator = '\'';
             DecimalSeparator = '.';
             Currency = "CHF";
             Defaults = new DefaultValues();
+<<<<<<< Updated upstream
 
             Save();
+=======
+>>>>>>> Stashed changes
         }
 
         /// <summary>
@@ -124,13 +190,20 @@ namespace MarchzinsBonusTool.Infrastructure
                 Defaults = new DefaultValues();
             }
 
+<<<<<<< Updated upstream
             if (!Enum.IsDefined(typeof(Language), Language))
             {
                 Language = Language.German;
+=======
+            if (!Enum.IsDefined(typeof(Infrastructure.Language), Language))
+            {
+                Language = Infrastructure.Language.German;
+>>>>>>> Stashed changes
             }
         }
 
         /// <summary>
+<<<<<<< Updated upstream
         /// Creates a deep copy of the current settings.
         /// </summary>
         /// <returns>New Settings instance with identical values</returns>
@@ -215,6 +288,8 @@ namespace MarchzinsBonusTool.Infrastructure
         }
 
         /// <summary>
+=======
+>>>>>>> Stashed changes
         /// Creates a backup of corrupted settings file for debugging.
         /// </summary>
         private static void CreateBackupOfCorruptedFile()
