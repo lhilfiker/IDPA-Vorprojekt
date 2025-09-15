@@ -280,7 +280,7 @@ namespace MarchzinsBonusTool.Infrastructure
                 [Language.English] = "Save"
             },
             ["Close"] = new() {
-                [Language.German] = "Schließen",
+                [Language.German] = "Schliessen",
                 [Language.English] = "Close"
             }
         };
