@@ -73,11 +73,7 @@ namespace MarchzinsBonusTool.Infrastructure
                 Validate();
 
                 var directory = Path.GetDirectoryName(SettingsPath);
-<<<<<<< Updated upstream
-                if (!Directory.Exists(directory))
-=======
                 if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
->>>>>>> Stashed changes
                 {
                     Directory.CreateDirectory(directory);
                 }
@@ -102,35 +98,21 @@ namespace MarchzinsBonusTool.Infrastructure
             {
                 if (!File.Exists(SettingsPath))
                 {
-<<<<<<< Updated upstream
-                    var defaultSettings = new Settings();
-                    defaultSettings.Save();
-                    return defaultSettings;
-=======
                     return new Settings();
->>>>>>> Stashed changes
                 }
 
                 var json = File.ReadAllText(SettingsPath);
 
                 if (string.IsNullOrWhiteSpace(json))
                 {
-<<<<<<< Updated upstream
-                    return CreateDefaultSettings();
-=======
                     return new Settings();
->>>>>>> Stashed changes
                 }
 
                 var settings = JsonConvert.DeserializeObject<Settings>(json);
 
                 if (settings == null)
                 {
-<<<<<<< Updated upstream
-                    return CreateDefaultSettings();
-=======
                     return new Settings();
->>>>>>> Stashed changes
                 }
 
                 settings.Validate();
@@ -139,33 +121,20 @@ namespace MarchzinsBonusTool.Infrastructure
             catch (Exception)
             {
                 CreateBackupOfCorruptedFile();
-<<<<<<< Updated upstream
-                return CreateDefaultSettings();
-=======
                 return new Settings();
->>>>>>> Stashed changes
             }
         }
 
         /// <summary>
-        /// Resets all settings to their default values and saves them.
+        /// Resets all settings to their default values.
         /// </summary>
         public void ResetToDefaults()
         {
-<<<<<<< Updated upstream
-            Language = Language.German;
-=======
             Language = Infrastructure.Language.German;
->>>>>>> Stashed changes
             ThousandsSeparator = '\'';
             DecimalSeparator = '.';
             Currency = "CHF";
             Defaults = new DefaultValues();
-<<<<<<< Updated upstream
-
-            Save();
-=======
->>>>>>> Stashed changes
         }
 
         /// <summary>
@@ -190,106 +159,13 @@ namespace MarchzinsBonusTool.Infrastructure
                 Defaults = new DefaultValues();
             }
 
-<<<<<<< Updated upstream
-            if (!Enum.IsDefined(typeof(Language), Language))
-            {
-                Language = Language.German;
-=======
             if (!Enum.IsDefined(typeof(Infrastructure.Language), Language))
             {
                 Language = Infrastructure.Language.German;
->>>>>>> Stashed changes
             }
         }
 
         /// <summary>
-<<<<<<< Updated upstream
-        /// Creates a deep copy of the current settings.
-        /// </summary>
-        /// <returns>New Settings instance with identical values</returns>
-        public Settings Clone()
-        {
-            var json = JsonConvert.SerializeObject(this);
-            return JsonConvert.DeserializeObject<Settings>(json);
-        }
-
-        /// <summary>
-        /// Checks if the settings file exists on disk.
-        /// </summary>
-        /// <returns>True if settings file exists, false otherwise</returns>
-        public static bool SettingsFileExists()
-        {
-            return File.Exists(SettingsPath);
-        }
-
-        /// <summary>
-        /// Gets the full path where settings are stored.
-        /// </summary>
-        /// <returns>Full file path to settings.json</returns>
-        public static string GetSettingsPath()
-        {
-            return SettingsPath;
-        }
-
-        /// <summary>
-        /// Applies number formatting based on current settings.
-        /// </summary>
-        /// <param name="value">Decimal value to format</param>
-        /// <returns>Formatted string representation</returns>
-        public string FormatNumber(decimal value)
-        {
-            var format = $"N2";
-            var formatted = value.ToString(format);
-
-            if (ThousandsSeparator != '\'' || DecimalSeparator != '.')
-            {
-                formatted = formatted.Replace(',', '|');
-                formatted = formatted.Replace('.', DecimalSeparator);
-                formatted = formatted.Replace('|', ThousandsSeparator);
-            }
-
-            return formatted;
-        }
-
-        /// <summary>
-        /// Parses a number string according to current format settings.
-        /// </summary>
-        /// <param name="input">String to parse</param>
-        /// <param name="result">Parsed decimal value</param>
-        /// <returns>True if parsing succeeded, false otherwise</returns>
-        public bool TryParseNumber(string input, out decimal result)
-        {
-            result = 0;
-
-            if (string.IsNullOrWhiteSpace(input))
-                return false;
-
-            try
-            {
-                var normalized = input.Replace(ThousandsSeparator.ToString(), "")
-                                     .Replace(DecimalSeparator, '.');
-
-                return decimal.TryParse(normalized, out result);
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Creates default settings and saves them to disk.
-        /// </summary>
-        private static Settings CreateDefaultSettings()
-        {
-            var settings = new Settings();
-            settings.Save();
-            return settings;
-        }
-
-        /// <summary>
-=======
->>>>>>> Stashed changes
         /// Creates a backup of corrupted settings file for debugging.
         /// </summary>
         private static void CreateBackupOfCorruptedFile()
