@@ -555,7 +555,8 @@
                     <Border Grid.Column="1" 
                             Background="#6B8FFF" 
                             CornerRadius="8"
-                            Padding="25">
+                            Padding="25"
+                            Margin="0,50,20,0">
                         <StackPanel>
                             <TextBlock Name="DetailedResultTitle"
                                        Text="Detailliertes Ergebnis" 
