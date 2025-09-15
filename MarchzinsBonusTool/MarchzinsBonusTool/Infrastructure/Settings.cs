@@ -4,45 +4,7 @@ using Newtonsoft.Json;
 
 namespace MarchzinsBonusTool.Infrastructure
 {
-    /// <summary>
-    /// Supported application languages.
-    /// </summary>
-    public enum Language
-    {
-        German = 0,
-        English = 1
-    }
-
-    /// <summary>
-    /// Default values for calculation inputs.
-    /// These values are used to pre-populate the UI forms.
-    /// </summary>
-    public class DefaultValues
-    {
-        public decimal DefaultCapital { get; set; } = 10000m;
-        public decimal DefaultNormalInterestRate { get; set; } = 1.5m;
-        public decimal DefaultBonusInterestRate { get; set; } = 2.5m;
-        public decimal DefaultTaxRate { get; set; } = 35m;
-
-        /// <summary>
-        /// Validates that all default values are within reasonable ranges.
-        /// </summary>
-        public void Validate()
-        {
-            if (DefaultCapital < 0)
-                DefaultCapital = 10000m;
-
-            if (DefaultNormalInterestRate < 0 || DefaultNormalInterestRate > 100)
-                DefaultNormalInterestRate = 1.5m;
-
-            if (DefaultBonusInterestRate < 0 || DefaultBonusInterestRate > 100)
-                DefaultBonusInterestRate = 2.5m;
-
-            if (DefaultTaxRate < 0 || DefaultTaxRate > 100)
-                DefaultTaxRate = 35m;
-        }
-    }
-
+    
     /// <summary>
     /// Application settings that are persisted to disk.
     /// Provides configuration management for user preferences, number formatting,
