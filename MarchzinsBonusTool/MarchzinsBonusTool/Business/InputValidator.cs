@@ -23,7 +23,7 @@ namespace MarchzinsBonusTool.Business
 
             decimal value = ParseDecimal(input);
             if (value <= 0)
-                return new ValidationResult(false, "Sparkapital muss größer als 0 sein");
+                return new ValidationResult(false, "Sparkapital muss grösser als 0 sein");
 
             if (value > 10_000_000_000)
                 return new ValidationResult(false, "Sparkapital ist zu gross");
