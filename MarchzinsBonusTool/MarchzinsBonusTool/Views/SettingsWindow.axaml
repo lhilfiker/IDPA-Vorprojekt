@@ -96,7 +96,8 @@
                                FontSize="24" 
                                Foreground="White"
                                Margin="0,0,10,0"/>
-                    <TextBlock Text="Einstellungen" 
+                    <TextBlock Name="SettingsTitle"
+                               Text="Einstellungen" 
                                FontSize="20" 
                                FontWeight="Bold" 
                                Foreground="White"/>
@@ -130,7 +131,10 @@
 
                     
                     <StackPanel>
-                        <TextBlock Text="Sprache" Classes="section-header" Margin="0,0,0,15"/>
+                        <TextBlock Name="LanguageTitle" 
+                                   Text="Sprache" 
+                                   Classes="section-header" 
+                                   Margin="0,0,0,15"/>
                         
                         <ComboBox ItemsSource="{Binding Languages}"
                                   SelectedItem="{Binding SelectedLanguage}">
@@ -152,20 +156,29 @@
 
                     
                     <StackPanel>
-                        <TextBlock Text="Standard-Währung" Classes="section-header" Margin="0,0,0,15"/>
+                        <TextBlock Name="DefaultCurrencyTitle" 
+                                   Text="Standard-Währung" 
+                                   Classes="section-header" 
+                                   Margin="0,0,0,15"/>
                         
                         <TextBox Text="{Binding Currency}"
                                  Watermark="CHF"
                                  MaxLength="5"/>
                         
-                        <TextBlock Text="Zahlenformat" Classes="section-header"/>
+                        <TextBlock Name="NumberFormatTitle" 
+                                   Text="Zahlenformat" 
+                                   Classes="section-header"/>
                         
-                        <TextBlock Text="Tausendertrennzeichen" Classes="label"/>
+                        <TextBlock Name="ThousandsSeparatorLabel" 
+                                   Text="Tausendertrennzeichen" 
+                                   Classes="label"/>
                         <TextBox Text="{Binding ThousandsSeparator}"
                                  MaxLength="1"
                                  Watermark="'"/>
                         
-                        <TextBlock Text="Dezimaltrennzeichen" Classes="label"/>
+                        <TextBlock Name="DecimalSeparatorLabel" 
+                                   Text="Dezimaltrennzeichen" 
+                                   Classes="label"/>
                         <TextBox Text="{Binding DecimalSeparator}"
                                  MaxLength="1"
                                  Watermark="."/>
@@ -180,17 +193,20 @@
 
                     
                     <StackPanel>
-                        <TextBlock Text="Voreinstellungen" Classes="section-header" Margin="0,0,0,15"/>
+                        <TextBlock Name="DefaultValuesTitle" 
+                                   Text="Voreinstellungen" 
+                                   Classes="section-header" 
+                                   Margin="0,0,0,15"/>
                         
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
                               ColumnDefinitions="*,20,*">
                             
                             <!-- Row 1 -->
-                            <TextBlock Grid.Row="0" Grid.Column="0" 
+                            <TextBlock Name="NormalPercentLabel" Grid.Row="0" Grid.Column="0" 
                                        Text="Normal %" 
                                        Classes="label"
                                        HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" 
+                            <TextBlock Name="BonusPercentLabel" Grid.Row="0" Grid.Column="2" 
                                        Text="Bonus %" 
                                        Classes="label"
                                        HorizontalAlignment="Center"/>
@@ -203,7 +219,7 @@
                                      Watermark="2.50"/>
                             
                             <!-- Row 2 -->
-                            <TextBlock Grid.Row="2" Grid.Column="0" 
+                            <TextBlock Name="TaxPercentLabel" Grid.Row="2" Grid.Column="0" 
                                        Grid.ColumnSpan="3"
                                        Text="Steuer %" 
                                        Classes="label"
@@ -227,7 +243,8 @@
                 BorderBrush="#E0E0E0"
                 BorderThickness="0,1,0,0">
             <Grid Margin="30,0">
-                <Button Content="Zurücksetzen"
+                <Button Name="ResetButton"
+                        Content="Zurücksetzen"
                         Classes="link"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -236,11 +253,13 @@
                 <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center">
-                    <Button Content="Speichern"
+                    <Button Name="SaveButton"
+                            Content="Speichern"
                             Classes="primary"
                             Command="{Binding SaveCommand}"
                             Margin="0,0,10,0"/>
-                    <Button Content="Abbrechen"
+                    <Button Name="CancelButton"
+                            Content="Abbrechen"
                             Classes="secondary"
                             Command="{Binding CancelCommand}"/>
                 </StackPanel>

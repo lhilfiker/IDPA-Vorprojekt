@@ -208,6 +208,61 @@ namespace MarchzinsBonusTool.Views
     var summaryLabel = this.FindControl<TextBlock>("SummaryLabel");
     if (summaryLabel != null)
         summaryLabel.Text = Localization.Get("Summary");
+var instruction1Text = this.FindControl<TextBlock>("Instruction1Text");
+if (instruction1Text != null)
+    instruction1Text.Text = Localization.Get("Instruction1Text");
+
+var instruction2Text = this.FindControl<TextBlock>("Instruction2Text");
+if (instruction2Text != null)
+    instruction2Text.Text = Localization.Get("Instruction2Text");
+
+var instruction3Text = this.FindControl<TextBlock>("Instruction3Text");
+if (instruction3Text != null)
+    instruction3Text.Text = Localization.Get("Instruction3Text");
+
+var instruction4Text = this.FindControl<TextBlock>("Instruction4Text");
+if (instruction4Text != null)
+    instruction4Text.Text = Localization.Get("Instruction4Text");
+
+var instruction5Text = this.FindControl<TextBlock>("Instruction5Text");
+if (instruction5Text != null)
+    instruction5Text.Text = Localization.Get("Instruction5Text");
+
+var customerLabelRun = this.FindControl<TextBlock>("CustomerLabelRun");
+if (customerLabelRun != null)
+    customerLabelRun.Text = Localization.Get("Customer");
+
+var capitalLabelRun = this.FindControl<TextBlock>("CapitalLabelRun");
+if (capitalLabelRun != null)
+    capitalLabelRun.Text = Localization.Get("Capital");
+
+var birthdayLabelRun = this.FindControl<TextBlock>("BirthdayLabelRun");
+if (birthdayLabelRun != null)
+    birthdayLabelRun.Text = Localization.Get("Birthday");
+
+var interestRatesLabelRun = this.FindControl<TextBlock>("InterestRatesLabelRun");
+if (interestRatesLabelRun != null)
+    interestRatesLabelRun.Text = Localization.Get("InterestRates");
+
+var normalPeriodLabelRun = this.FindControl<TextBlock>("NormalPeriodLabelRun");
+if (normalPeriodLabelRun != null)
+    normalPeriodLabelRun.Text = Localization.Get("NormalPeriod");
+
+var bonusPeriodLabelRun = this.FindControl<TextBlock>("BonusPeriodLabelRun");
+if (bonusPeriodLabelRun != null)
+    bonusPeriodLabelRun.Text = Localization.Get("BonusPeriod");
+
+var grossInterestTotalLabelRun = this.FindControl<TextBlock>("GrossInterestTotalLabelRun");
+if (grossInterestTotalLabelRun != null)
+    grossInterestTotalLabelRun.Text = Localization.Get("GrossInterestTotal");
+
+var withholdingTaxAmountLabelRun = this.FindControl<TextBlock>("WithholdingTaxAmountLabelRun");
+if (withholdingTaxAmountLabelRun != null)
+    withholdingTaxAmountLabelRun.Text = Localization.Get("WithholdingTaxAmount");
+
+var netInterestLabelRun = this.FindControl<TextBlock>("NetInterestLabelRun");
+if (netInterestLabelRun != null)
+    netInterestLabelRun.Text = Localization.Get("NetInterest");
 }
 
         

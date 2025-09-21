@@ -282,6 +282,110 @@ namespace MarchzinsBonusTool.Infrastructure
             ["Close"] = new() {
                 [Language.German] = "Schliessen",
                 [Language.English] = "Close"
+            },
+            ["Instruction1Text"] = new() {
+                [Language.German] = "Kundendaten eingeben",
+                [Language.English] = "Enter customer data"
+            },
+            ["Instruction2Text"] = new() {
+                [Language.German] = "Geburtsdatum im aktuellen Monat wählen", 
+                [Language.English] = "Select birth date in current month"
+            },
+            ["Instruction3Text"] = new() {
+                [Language.German] = "Sparkapital eingeben",
+                [Language.English] = "Enter savings capital"
+            },
+            ["Instruction4Text"] = new() {
+                [Language.German] = "Zinssätze überprüfen",
+                [Language.English] = "Check interest rates"
+            },
+            ["Instruction5Text"] = new() {
+                [Language.German] = "Berechnen klicken",
+                [Language.English] = "Click Calculate"
+            },
+            ["CustomerRun"] = new() {
+                [Language.German] = "Kunde:",
+                [Language.English] = "Customer:"
+            },
+            ["CapitalRun"] = new() {
+                [Language.German] = "Kapital:",
+                [Language.English] = "Capital:"
+            },
+            ["BirthdayRun"] = new() {
+                [Language.German] = "Geburtstag:",
+                [Language.English] = "Birthday:"
+            },
+            ["InterestRatesRun"] = new() {
+                [Language.German] = "Zinssätze:",
+                [Language.English] = "Interest Rates:"
+            },
+            ["NormalPeriodRun"] = new() {
+                [Language.German] = "Normal-Periode:",
+                [Language.English] = "Normal Period:"
+            },
+            ["BonusPeriodRun"] = new() {
+                [Language.German] = "Bonus-Periode:",
+                [Language.English] = "Bonus Period:"
+            },
+            ["GrossInterestTotalRun"] = new() {
+                [Language.German] = "Brutto-Zinsen gesamt:",
+                [Language.English] = "Gross Interest Total:"
+            },
+            ["WithholdingTaxAmountRun"] = new() {
+                [Language.German] = "Verrechnungssteuer (35%): -",
+                [Language.English] = "Withholding Tax (35%): -"
+            },
+            ["NetInterestRun"] = new() {
+                [Language.German] = "NETTO-ZINSEN:",
+                [Language.English] = "NET INTEREST:"
+            },
+            ["CalculationTimestamp"] = new() {
+                [Language.German] = "Berechnet am {date} um {time} Uhr",
+                [Language.English] = "Calculated on {date} at {time}"
+            },
+            ["Days"] = new() {
+                [Language.German] = "Tage",
+                [Language.English] = "Days"
+            },
+            ["Language"] = new() {
+                [Language.German] = "Sprache",
+                [Language.English] = "Language"
+            },
+            ["DefaultCurrency"] = new() {
+                [Language.German] = "Standard-Währung",
+                [Language.English] = "Default Currency"
+            },
+            ["NumberFormat"] = new() {
+                [Language.German] = "Zahlenformat",
+                [Language.English] = "Number Format"
+            },
+            ["ThousandsSeparator"] = new() {
+                [Language.German] = "Tausendertrennzeichen",
+                [Language.English] = "Thousands Separator"
+            },
+            ["DecimalSeparator"] = new() {
+                [Language.German] = "Dezimaltrennzeichen",
+                [Language.English] = "Decimal Separator"
+            },
+            ["DefaultValues"] = new() {
+                [Language.German] = "Voreinstellungen",
+                [Language.English] = "Default Values"
+            },
+            ["NormalPercent"] = new() {
+                [Language.German] = "Normal %",
+                [Language.English] = "Normal %"
+            },
+            ["BonusPercent"] = new() {
+                [Language.German] = "Bonus %",
+                [Language.English] = "Bonus %"
+            },
+            ["TaxPercent"] = new() {
+                [Language.German] = "Steuer %",
+                [Language.English] = "Tax %"
+            },
+            ["ResetToDefaults"] = new() {
+                [Language.German] = "Zurücksetzen",
+                [Language.English] = "Reset to Defaults"
             }
         };
 
