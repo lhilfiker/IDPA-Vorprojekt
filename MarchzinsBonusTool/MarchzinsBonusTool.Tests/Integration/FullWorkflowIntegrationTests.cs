@@ -50,8 +50,7 @@ namespace MarchzinsBonusTool.Tests.Integration
             Assert.NotEmpty(viewModel.FormattedSparkapital);
             Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 10).ToString("dd.MM.yyyy"), viewModel.FormattedGeburtsdatum ?? "");
             Assert.Contains("Hans Muster", viewModel.KundenNameInput ?? "");
-
-
+            
             // 4. Start new calculation
             viewModel.NewCalculationCommand.Execute(null);
             Assert.False(viewModel.HasResults);
