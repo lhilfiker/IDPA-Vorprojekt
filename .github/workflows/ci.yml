@@ -29,15 +29,15 @@ jobs:
       run: dotnet build MarchzinsBonusTool/MarchzinsBonusTool.sln --no-restore --configuration Release
 
     - name: Run unit tests
-      run: dotnet test MarchzinsBonusTool/MarchzinsBonusTool.sln --no-build --configuration Release --logger trx
+      run: dotnet test MarchzinsBonusTool/MarchzinsBonusTool.sln --no-build --configuration Release --logger trx --filter "FullyQualifiedName!~GUI"
 
     - name: Run GUI tests (Linux with Xvfb)
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get update
         sudo apt-get install -y xvfb
-        xvfb-run -a dotnet test MarchzinsBonusTool/MarchzinsBonusTool.sln --no-build --configuration Release --filter "Category=GUI"
+        xvfb-run -a dotnet test MarchzinsBonusTool/MarchzinsBonusTool.sln --no-build --configuration Release --filter "FullyQualifiedName~GUI"
 
     - name: Run GUI tests (Windows)
       if: matrix.os == 'windows-latest'
-      run: dotnet test MarchzinsBonusTool/MarchzinsBonusTool.sln --no-build --configuration Release --filter "Category=GUI"
+      run: dotnet test MarchzinsBonusTool/MarchzinsBonusTool.sln --no-build --configuration Release --filter "FullyQualifiedName~GUI"
