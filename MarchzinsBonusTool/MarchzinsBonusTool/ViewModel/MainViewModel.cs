@@ -359,7 +359,7 @@ namespace MarchzinsBonusTool.ViewModels
             GeburtsdatumInput = new DateTime(now.Year, now.Month, Math.Min(15, DateTime.DaysInMonth(now.Year, now.Month)));
             
             KundenNameInput = string.Empty;
-            SelectedCurrency = settings.Currency;
+            SelectedCurrency = "CHF";
             UpdateCurrentDateDisplay();
             ClearResults();
         }
