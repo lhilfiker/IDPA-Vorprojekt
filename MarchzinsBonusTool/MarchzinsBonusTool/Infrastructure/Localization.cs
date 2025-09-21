@@ -346,6 +346,46 @@ namespace MarchzinsBonusTool.Infrastructure
             ["Days"] = new() {
                 [Language.German] = "Tage",
                 [Language.English] = "Days"
+            },
+            ["Language"] = new() {
+                [Language.German] = "Sprache",
+                [Language.English] = "Language"
+            },
+            ["DefaultCurrency"] = new() {
+                [Language.German] = "Standard-Währung",
+                [Language.English] = "Default Currency"
+            },
+            ["NumberFormat"] = new() {
+                [Language.German] = "Zahlenformat",
+                [Language.English] = "Number Format"
+            },
+            ["ThousandsSeparator"] = new() {
+                [Language.German] = "Tausendertrennzeichen",
+                [Language.English] = "Thousands Separator"
+            },
+            ["DecimalSeparator"] = new() {
+                [Language.German] = "Dezimaltrennzeichen",
+                [Language.English] = "Decimal Separator"
+            },
+            ["DefaultValues"] = new() {
+                [Language.German] = "Voreinstellungen",
+                [Language.English] = "Default Values"
+            },
+            ["NormalPercent"] = new() {
+                [Language.German] = "Normal %",
+                [Language.English] = "Normal %"
+            },
+            ["BonusPercent"] = new() {
+                [Language.German] = "Bonus %",
+                [Language.English] = "Bonus %"
+            },
+            ["TaxPercent"] = new() {
+                [Language.German] = "Steuer %",
+                [Language.English] = "Tax %"
+            },
+            ["ResetToDefaults"] = new() {
+                [Language.German] = "Zurücksetzen",
+                [Language.English] = "Reset to Defaults"
             }
         };
 
