@@ -338,7 +338,11 @@ namespace MarchzinsBonusTool.Infrastructure
             ["NetInterestRun"] = new() {
                 [Language.German] = "NETTO-ZINSEN:",
                 [Language.English] = "NET INTEREST:"
-            }
+            },
+            ["CalculationTimestamp"] = new() {
+                [Language.German] = "Berechnet am {date} um {time} Uhr",
+                [Language.English] = "Calculated on {date} at {time}"
+            },
         };
 
         /// <summary>

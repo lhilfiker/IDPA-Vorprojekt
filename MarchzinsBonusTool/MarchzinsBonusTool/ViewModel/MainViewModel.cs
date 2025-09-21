@@ -222,7 +222,6 @@ namespace MarchzinsBonusTool.ViewModels
 
         public Settings Settings => settings;
 
-        // New properties for updated UI
         public string FormattedSparkapital
         {
             get => formattedSparkapital;
@@ -331,8 +330,10 @@ namespace MarchzinsBonusTool.ViewModels
                 NormalCalculationDisplay = $"{FormattedSparkapital} × {normalerZinssatz/100:F4} × {normalDays}/365 = {DisplayBruttoZinsenNormal}";
                 BonusCalculationDisplay = $"{FormattedSparkapital} × {bonusZinssatz/100:F4} × {bonusTage}/365 = {DisplayBruttoZinsenBonus}";
                 
-                CalculationTimestamp = $"Berechnet am {DateTime.Now:dd.MM.yyyy} um {DateTime.Now:HH:mm} Uhr";
-
+                CalculationTimestamp = Localization.Get("CalculationTimestamp")
+                    .Replace("{date}", DateTime.Now.ToString("dd.MM.yyyy"))
+                    .Replace("{time}", DateTime.Now.ToString("HH:mm"));
+                
                 HasResults = true;
             }
             catch (Exception ex)
@@ -468,6 +469,14 @@ namespace MarchzinsBonusTool.ViewModels
             formatter = new NumberFormatter(settings);
             SelectedCurrency = settings.Currency;
             UpdateCurrentDateDisplay();
+            
+            if (HasResults) // the result message needs to be updated because it doesn't use localized strings
+            {
+                CalculationTimestamp = Localization.Get("CalculationTimestamp")
+                    .Replace("{date}", DateTime.Now.ToString("dd.MM.yyyy"))
+                    .Replace("{time}", DateTime.Now.ToString("HH:mm"));
+            }
+            
             OnPropertyChanged(nameof(Settings));
         }
 
