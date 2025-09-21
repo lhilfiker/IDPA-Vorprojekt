@@ -324,8 +324,8 @@ namespace MarchzinsBonusTool.ViewModels
                 int totalDays = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
                 int normalDays = totalDays - bonusTage;
                 
-                NormalPeriodDisplay = $"{normalDays} Tage × {normalerZinssatz:F2}%";
-                BonusPeriodDisplay = $"{bonusTage} Tage × {bonusZinssatz:F2}%";
+                NormalPeriodDisplay = $"{normalDays} {Localization.Get("Days")} × {normalerZinssatz:F2}%";
+                BonusPeriodDisplay = $"{bonusTage} {Localization.Get("Days")} × {bonusZinssatz:F2}%";
                 
                 NormalCalculationDisplay = $"{FormattedSparkapital} × {normalerZinssatz/100:F4} × {normalDays}/365 = {DisplayBruttoZinsenNormal}";
                 BonusCalculationDisplay = $"{FormattedSparkapital} × {bonusZinssatz/100:F4} × {bonusTage}/365 = {DisplayBruttoZinsenBonus}";
@@ -475,6 +475,20 @@ namespace MarchzinsBonusTool.ViewModels
                 CalculationTimestamp = Localization.Get("CalculationTimestamp")
                     .Replace("{date}", DateTime.Now.ToString("dd.MM.yyyy"))
                     .Replace("{time}", DateTime.Now.ToString("HH:mm"));
+                
+                // update the days text in the calulation result
+                var normalDaysText = NormalPeriodDisplay.Split(' ')[0];
+                var bonusDaysText = BonusPeriodDisplay.Split(' ')[0];
+    
+                if (int.TryParse(normalDaysText, out int normalDays) && int.TryParse(bonusDaysText, out int bonusDays))
+                {
+                    // this is a bit hacky, but it works
+                    var normalRate = decimal.Parse(NormalerZinssatzInput);
+                    var bonusRate = decimal.Parse(BonusZinssatzInput);
+        
+                    NormalPeriodDisplay = $"{normalDays} {Localization.Get("Days")} × {normalRate:F2}%";
+                    BonusPeriodDisplay = $"{bonusDays} {Localization.Get("Days")} × {bonusRate:F2}%";
+                }
             }
             
             OnPropertyChanged(nameof(Settings));

@@ -343,6 +343,10 @@ namespace MarchzinsBonusTool.Infrastructure
                 [Language.German] = "Berechnet am {date} um {time} Uhr",
                 [Language.English] = "Calculated on {date} at {time}"
             },
+            ["Days"] = new() {
+                [Language.German] = "Tage",
+                [Language.English] = "Days"
+            }
         };
 
         /// <summary>
