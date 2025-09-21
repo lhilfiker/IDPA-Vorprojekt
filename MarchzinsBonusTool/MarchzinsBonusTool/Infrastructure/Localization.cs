@@ -282,6 +282,62 @@ namespace MarchzinsBonusTool.Infrastructure
             ["Close"] = new() {
                 [Language.German] = "Schliessen",
                 [Language.English] = "Close"
+            },
+            ["Instruction1Text"] = new() {
+                [Language.German] = "Kundendaten eingeben",
+                [Language.English] = "Enter customer data"
+            },
+            ["Instruction2Text"] = new() {
+                [Language.German] = "Geburtsdatum im aktuellen Monat wählen", 
+                [Language.English] = "Select birth date in current month"
+            },
+            ["Instruction3Text"] = new() {
+                [Language.German] = "Sparkapital eingeben",
+                [Language.English] = "Enter savings capital"
+            },
+            ["Instruction4Text"] = new() {
+                [Language.German] = "Zinssätze überprüfen",
+                [Language.English] = "Check interest rates"
+            },
+            ["Instruction5Text"] = new() {
+                [Language.German] = "Berechnen klicken",
+                [Language.English] = "Click Calculate"
+            },
+            ["CustomerRun"] = new() {
+                [Language.German] = "Kunde:",
+                [Language.English] = "Customer:"
+            },
+            ["CapitalRun"] = new() {
+                [Language.German] = "Kapital:",
+                [Language.English] = "Capital:"
+            },
+            ["BirthdayRun"] = new() {
+                [Language.German] = "Geburtstag:",
+                [Language.English] = "Birthday:"
+            },
+            ["InterestRatesRun"] = new() {
+                [Language.German] = "Zinssätze:",
+                [Language.English] = "Interest Rates:"
+            },
+            ["NormalPeriodRun"] = new() {
+                [Language.German] = "Normal-Periode:",
+                [Language.English] = "Normal Period:"
+            },
+            ["BonusPeriodRun"] = new() {
+                [Language.German] = "Bonus-Periode:",
+                [Language.English] = "Bonus Period:"
+            },
+            ["GrossInterestTotalRun"] = new() {
+                [Language.German] = "Brutto-Zinsen gesamt:",
+                [Language.English] = "Gross Interest Total:"
+            },
+            ["WithholdingTaxAmountRun"] = new() {
+                [Language.German] = "Verrechnungssteuer (35%): -",
+                [Language.English] = "Withholding Tax (35%): -"
+            },
+            ["NetInterestRun"] = new() {
+                [Language.German] = "NETTO-ZINSEN:",
+                [Language.English] = "NET INTEREST:"
             }
         };
 
