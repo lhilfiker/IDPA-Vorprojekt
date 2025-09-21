@@ -48,7 +48,9 @@ namespace MarchzinsBonusTool.Tests.Integration
             Assert.NotEmpty(viewModel.DisplayNettoZinsen);
             Assert.NotEmpty(viewModel.DisplayBruttoZinsenTotal);
             Assert.NotEmpty(viewModel.FormattedSparkapital);
-            Assert.Contains("Hans Muster", viewModel.FormattedGeburtsdatum ?? "");
+            Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 10).ToString("dd.MM.yyyy"), viewModel.FormattedGeburtsdatum ?? "");
+            Assert.Contains("Hans Muster", viewModel.KundenNameInput ?? "");
+
 
             // 4. Start new calculation
             viewModel.NewCalculationCommand.Execute(null);
