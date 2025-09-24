@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using Newtonsoft.Json;
+using MarchzinsBonusTool.Infrastructure.Exceptions;
 
 namespace MarchzinsBonusTool.Infrastructure
 {
-    
     /// <summary>
     /// Application settings that are persisted to disk.
     /// Provides configuration management for user preferences, number formatting,
@@ -27,7 +27,7 @@ namespace MarchzinsBonusTool.Infrastructure
         /// Saves the current settings to disk.
         /// Creates the directory structure if it doesn't exist.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown when settings cannot be saved</exception>
+        /// <exception cref="SettingsException">Thrown when settings cannot be saved</exception>
         public void Save()
         {
             try
@@ -45,7 +45,11 @@ namespace MarchzinsBonusTool.Infrastructure
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Fehler beim Speichern der Einstellungen: {ex.Message}", ex);
+                throw new SettingsException(
+                    $"Fehler beim Speichern der Einstellungen: {ex.Message}",
+                    ex,
+                    "Einstellungen konnten nicht gespeichert werden. Überprüfen Sie die Berechtigungen."
+                );
             }
         }
 

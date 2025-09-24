@@ -4,6 +4,8 @@ using System.Windows.Input;
 using MarchzinsBonusTool.Business;
 using MarchzinsBonusTool.Commands;
 using MarchzinsBonusTool.Infrastructure;
+using MarchzinsBonusTool.Infrastructure.ErrorHandling;
+using MarchzinsBonusTool.Infrastructure.Exceptions;
 
 namespace MarchzinsBonusTool.ViewModels
 {
@@ -15,7 +17,7 @@ namespace MarchzinsBonusTool.ViewModels
         private NumberFormatter formatter;
         private readonly InputValidator validator;
         private Settings settings;
-        
+
         // Input fields
         private string sparkapitalInput = string.Empty;
         private DateTime geburtsdatumInput = DateTime.Now;
@@ -24,7 +26,7 @@ namespace MarchzinsBonusTool.ViewModels
         private string bonusZinssatzInput = string.Empty;
         private string steuersatzInput = string.Empty;
         private string selectedCurrency = "CHF";
-        
+
         // Display fields
         private string displayBonusPeriode = string.Empty;
         private string displayBruttoZinsenNormal = string.Empty;
@@ -34,7 +36,7 @@ namespace MarchzinsBonusTool.ViewModels
         private string displayNettoZinsen = string.Empty;
         private string errorMessage = string.Empty;
         private bool hasResults = false;
-        
+
         // Additional display fields for new UI
         private string currentDateDisplay = string.Empty;
         private string formattedSparkapital = string.Empty;
@@ -71,7 +73,7 @@ namespace MarchzinsBonusTool.ViewModels
 
             // Set current date display
             UpdateCurrentDateDisplay();
-            
+
             // Load default values on startup
             LoadDefaults();
         }
@@ -103,11 +105,11 @@ namespace MarchzinsBonusTool.ViewModels
                 }
             }
         }
-        
+
         public DateTimeOffset GeburtsdatumOffset
         {
             get => new DateTimeOffset(geburtsdatumInput);
-            set 
+            set
             {
                 GeburtsdatumInput = value.DateTime;
             }
@@ -320,25 +322,25 @@ namespace MarchzinsBonusTool.ViewModels
                 FormattedSparkapital = formatter.FormatCurrency(sparkapital);
                 FormattedGeburtsdatum = GeburtsdatumInput.ToString("dd.MM.yyyy");
                 ZinssatzDisplay = $"{normalerZinssatz:F2}% / {bonusZinssatz:F2}% (Bonus)";
-                
+
                 int totalDays = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
                 int normalDays = totalDays - bonusTage;
-                
+
                 NormalPeriodDisplay = $"{normalDays} {Localization.Get("Days")} × {normalerZinssatz:F2}%";
                 BonusPeriodDisplay = $"{bonusTage} {Localization.Get("Days")} × {bonusZinssatz:F2}%";
-                
-                NormalCalculationDisplay = $"{FormattedSparkapital} × {normalerZinssatz/100:F4} × {normalDays}/365 = {DisplayBruttoZinsenNormal}";
-                BonusCalculationDisplay = $"{FormattedSparkapital} × {bonusZinssatz/100:F4} × {bonusTage}/365 = {DisplayBruttoZinsenBonus}";
-                
+
+                NormalCalculationDisplay = $"{FormattedSparkapital} × {normalerZinssatz / 100:F4} × {normalDays}/365 = {DisplayBruttoZinsenNormal}";
+                BonusCalculationDisplay = $"{FormattedSparkapital} × {bonusZinssatz / 100:F4} × {bonusTage}/365 = {DisplayBruttoZinsenBonus}";
+
                 CalculationTimestamp = Localization.Get("CalculationTimestamp")
                     .Replace("{date}", DateTime.Now.ToString("dd.MM.yyyy"))
                     .Replace("{time}", DateTime.Now.ToString("HH:mm"));
-                
+
                 HasResults = true;
             }
             catch (Exception ex)
             {
-                ErrorMessage = $"Fehler bei der Berechnung: {ex.Message}";
+                ErrorMessage = ErrorHandler.HandleException(ex, "Marchzins-Berechnung");
                 HasResults = false;
             }
         }
@@ -353,11 +355,11 @@ namespace MarchzinsBonusTool.ViewModels
             NormalerZinssatzInput = FormatForInput(defaults.NormalerZinssatz);
             BonusZinssatzInput = FormatForInput(defaults.BonusZinssatz);
             SteuersatzInput = FormatForInput(defaults.Steuersatz);
-            
+
             // Set birth date to the 15th of current month
             var now = DateTime.Now;
             GeburtsdatumInput = new DateTime(now.Year, now.Month, Math.Min(15, DateTime.DaysInMonth(now.Year, now.Month)));
-            
+
             KundenNameInput = string.Empty;
             SelectedCurrency = "CHF";
             UpdateCurrentDateDisplay();
@@ -469,28 +471,28 @@ namespace MarchzinsBonusTool.ViewModels
             formatter = new NumberFormatter(settings);
             SelectedCurrency = settings.Currency;
             UpdateCurrentDateDisplay();
-            
+
             if (HasResults) // the result message needs to be updated because it doesn't use localized strings
             {
                 CalculationTimestamp = Localization.Get("CalculationTimestamp")
                     .Replace("{date}", DateTime.Now.ToString("dd.MM.yyyy"))
                     .Replace("{time}", DateTime.Now.ToString("HH:mm"));
-                
+
                 // update the days text in the calulation result
                 var normalDaysText = NormalPeriodDisplay.Split(' ')[0];
                 var bonusDaysText = BonusPeriodDisplay.Split(' ')[0];
-    
+
                 if (int.TryParse(normalDaysText, out int normalDays) && int.TryParse(bonusDaysText, out int bonusDays))
                 {
                     // this is a bit hacky, but it works
                     var normalRate = decimal.Parse(NormalerZinssatzInput);
                     var bonusRate = decimal.Parse(BonusZinssatzInput);
-        
+
                     NormalPeriodDisplay = $"{normalDays} {Localization.Get("Days")} × {normalRate:F2}%";
                     BonusPeriodDisplay = $"{bonusDays} {Localization.Get("Days")} × {bonusRate:F2}%";
                 }
             }
-            
+
             OnPropertyChanged(nameof(Settings));
         }
 
