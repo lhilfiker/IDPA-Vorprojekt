@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using MarchzinsBonusTool.Infrastructure.Exceptions;
 
 namespace MarchzinsBonusTool.Infrastructure
 {
@@ -28,7 +29,11 @@ namespace MarchzinsBonusTool.Infrastructure
         {
             if (string.IsNullOrWhiteSpace(userInput))
             {
-                throw new ArgumentException("Input cannot be null or empty.", nameof(userInput));
+                throw new ValidationException(
+                    "UserInput",
+                    "Input cannot be null or empty.",
+                    "Eingabe darf nicht leer sein."
+                );
             }
 
             // clean up input
@@ -55,7 +60,11 @@ namespace MarchzinsBonusTool.Infrastructure
                 return result;
             }
 
-            throw new FormatException($"Cannot parse '{userInput}' as a valid number.");
+            throw new ValidationException(
+                "NumberFormat",
+                $"Cannot parse '{userInput}' as a valid number.",
+                "Ungültiges Zahlenformat. Verwenden Sie Dezimalzahlen wie 1.50 oder 100'000."
+            );
         }
 
         /// <summary>
@@ -63,7 +72,7 @@ namespace MarchzinsBonusTool.Infrastructure
         /// </summary>
         public string FormatCurrency(decimal value)
         {
-            // Fformat with 2 decimal places
+            // Format with 2 decimal places
             string formattedNumber = FormatDecimal(value, 2);
 
             // add currency symbol
